@@ -86,7 +86,7 @@ public class AccountPage {
 	}
 	
 	public SearchResultPage doSearch(String productName) {
-		
+		elementUtil.waitForVisibilityOfElement(search, AppConstants.SHORT_DEFAULT_WAIT).clear();		
 		elementUtil.waitForVisibilityOfElement(search, AppConstants.SHORT_DEFAULT_WAIT).sendKeys(productName);
 		elementUtil.doClick(searchButton);
 		return new SearchResultPage(driver);

@@ -25,5 +25,7 @@ public class AppConstants {
 			"Newsletter");
 
 	public static final int ACCOUNT_PAGE_Links_COUNT = 13;
+	
+	public static final String USER_REGISTER_SUCESS_MESSG="Your Account Has Been Created ";
 
 }
