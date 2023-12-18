@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.qa.opencart.base.BaseTest;
@@ -15,11 +16,22 @@ public class ProductResultPageTest extends BaseTest {
 		acctpage = loginpage.doLogin(prop.getProperty("username"), prop.getProperty("password"));
 	}
 	
-	@Test
-	public void productImageTest() {
-		searchResultPage=acctpage.doSearch("MacBook");
-		productInfoPage=searchResultPage.selectProduct("MacBook Pro");
-		Assert.assertEquals(productInfoPage.getImageCount(),4);
+	@DataProvider
+	public Object[][] getSearchData() {
+		
+		return new Object[][] {
+				{"MacBook","MacBook Pro",4},
+				{"MacBook","MacBook Air",4},
+				{"iMac","iMac",3},
+				{"Samsung","Samsung SyncMaster 941BW",1}
+		};
+	}
+	
+	@Test(dataProvider="getSearchData")
+	public void productImageTest(String searchKey,String ProductName,int imageCount) {
+		searchResultPage=acctpage.doSearch(searchKey);
+		productInfoPage=searchResultPage.selectProduct(ProductName);
+		Assert.assertEquals(productInfoPage.getImageCount(),imageCount);
 	}
 	@Test
 	public void productInfoTest() {
